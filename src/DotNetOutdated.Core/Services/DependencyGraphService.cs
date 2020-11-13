@@ -31,8 +31,7 @@ namespace DotNetOutdated.Core.Services
 
             if (runStatus.IsSuccess)
             {
-                var dependencyGraphText = _fileSystem.File.ReadAllText(dgOutput);
-                return new DependencyGraphSpec(JsonConvert.DeserializeObject<JObject>(dependencyGraphText));
+                return DependencyGraphSpec.Load(dgOutput);
             }
 
             throw new CommandValidationException($"Unable to process the project `{projectPath}. Are you sure this is a valid .NET Core or .NET Standard project type?" +
